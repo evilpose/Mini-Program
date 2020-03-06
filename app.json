@@ -1,0 +1,43 @@
+{
+  "pages": [
+    "pages/homePage/homePage",
+    "pages/news/news",
+    "pages/myself/myself",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "友教",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar":{
+    "color": "#101010",
+    "selectedColor": "#101010",
+    "borderStyle": "white",
+    "backgroundColor": "#F8F8F8",
+    "list": [
+      {
+        "pagePath": "pages/homePage/homePage",
+        "text": "首页",
+        "iconPath": "icon/home_no.png",
+        "selectedIconPath": "icon/home.png"
+      },
+      {
+        "pagePath": "pages/news/news",
+        "text": "消息",
+        "iconPath": "icon/new_no.png",
+        "selectedIconPath": "icon/new.png"
+      },
+      {
+        "pagePath": "pages/myself/myself",
+        "text": "我的",
+        "iconPath": "icon/me_no.png",
+        "selectedIconPath": "icon/me.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

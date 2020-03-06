@@ -1,0 +1,167 @@
+<!--pages/homePage/homePage.wxml-->
+<view class="address">
+  <view class="add">
+    <text>青岛</text>
+    <image src="../../icon/down.png"></image>
+  </view>
+  <image src="../../icon/search.png" style="width:40rpx;height:40rpx"></image>
+</view>
+<view class="roll">
+  <swiper autoplay indicator-dots circular>
+    <swiper-item wx:for="{{swiperList}}" wx:key="index">
+      <!-- <navigator> -->
+        <image mode="scaleToFill" src="{{item.imgSrc}}"></image>
+      <!-- </navigator> -->
+    </swiper-item>
+  </swiper>
+</view>
+<view class="identity">
+<!-- {{identity == '老师' ？'#CBC7C7' : 'black'}} -->
+  <view class="Parent" bindtap="selectParent">
+    <text style="color:{{ identity == '家长' ? 'black' : '#CBC7C7'}}">我是家长</text>
+    <view style="height:10rpx;background-color:{{ identity == '家长' ? 'rgba(250, 233, 78, 1)' : 'white'}};width:100rpx;border-radius: 5rpx"></view>
+  </view>
+  <view class="teacher" bindtap="selectTecher">
+    <text style="color:{{ identity == '老师' ? 'black' : '#CBC7C7'}}">我是老师</text>
+    <view style="height:10rpx;background-color:{{ identity == '老师' ? 'rgba(250, 233, 78, 1)' : 'white'}};width:100rpx;border-radius: 5rpx"></view>
+  </view>
+</view>
+<!-- 家长的页面 -->
+<view class="ParentView" wx:if="{{ identity == '家长'}}" style="position:relative">
+<!-- 遮罩 -->
+<!-- <view style="width: 100%;height: 100%;position: fixed;overflow: hidden;background-color: #4D4D4D ;z-index: 2;top: 0;left: 0;opacity: 0.6" ></view> -->
+  <!-- 上面的筛选条件横框 -->
+  <view class="orderView">
+    <view bindtap="ParentSelec" data-id="1">
+      <text style="color:{{ParentOrder.state === '1'?'black':''}}">{{ParentOrder.order?ParentOrder.order:'排序'}}</text>
+      <image src="../../icon/drop-down.png"></image>
+    </view>
+    <view bindtap="ParentSelec" data-id="2">
+      <text style="color:{{ParentOrder.state === '2'?'black':''}}">{{ParentOrder.subject.sub?ParentOrder.subject.sub:'科目'}}</text>
+      <image src="../../icon/drop-down.png"></image>
+    </view>
+    <view bindtap="ParentSelec" data-id="3">
+      <text style="color:{{ParentOrder.state === '3'?'black':''}}">{{ParentOrder.university.abbreviation?ParentOrder.university.abbreviation:'大学'}}</text>
+      <image src="../../icon/drop-down.png"></image>
+    </view>
+    <view bindtap="ParentSelec" data-id="4">
+      <text style="color:{{ParentOrder.state === '4'?'black':''}}">{{ParentOrder.gender?ParentOrder.gender:'性别'}}</text>
+      <image src="../../icon/drop-down.png"></image>
+    </view>
+  </view>
+  <!-- 第一个下拉框 -->
+  <view class="dropDownOne suspension" wx:if="{{ParentOrder.state === '1'}}">
+    <view wx:for="{{order}}" wx:key="index" bindtap="ParentSelecOrder" data-order="{{item}}">
+      <text style="background-color:{{ParentOrder.order == item ? '#DAD8D8' : 'white'}};color:{{ParentOrder.order == item ? 'black' : ''}}">{{item}}</text>
+      <image src="../../icon/selec.png" style="visibility: {{ParentOrder.order == item ? 'visible' : 'hidden'}};width:30rpx;height:30rpx"></image>
+    </view>
+  </view>
+  <!-- 第二个下拉框 -->
+  <view class="dropDownTwo suspension" wx:if="{{ParentOrder.state === '2'}}">
+    <!-- 左边的类别 -->
+    <view class="subjectType">
+      <text wx:for="{{subject}}" wx:for-index="key" wx:for-item="value" wx:key="index" data-item='{{key}}' bindtap="selectType" style="background-color:{{ParentOrder.subject.type == key ? '#DAD8D8' : 'white'}};color:{{ParentOrder.subject.type == key ? 'black' : ''}};margin-top:{{key == '小学' ? '10rpx' : '20rpx'}}">{{key}}</text>
+    </view>
+    <!-- 右边的每一课的种类 --> 
+    <view class="EverySubject">
+      <view wx:for="{{subject[ParentOrder.subject.type]}}" wx:key="index" style="height:{{index < 3 ? '40rpx' : ''}}">
+        <text bindtap="selectSub"  data-item='{{item}}' style="background-color:{{ParentOrder.subject.sub == item ? '#DAD8D8' : 'white'}};color:{{ParentOrder.subject.sub == item ? 'black' : ''}}">{{item}}</text>
+      </view>
+    </view>
+  </view>
+  <!-- 第三个下拉框 -->
+  <view class="dropDownThree suspension" wx:if="{{ParentOrder.state === '3'}}">
+    <view wx:for="{{university}}" wx:key="index" >
+      <text bindtap="selectUniversity" data-abbreviation='{{item.abbreviation}}' data-name='{{item.name}}' style="background-color:{{ParentOrder.university.name == item.name ? '#DAD8D8' : 'white'}};color:{{ParentOrder.university.name == item.name ? 'black' : ''}}">{{item.name}}</text>
+    </view>
+  </view>
+  <!-- 第四个下拉框 -->
+  <view class="dropDownOne suspension" wx:if="{{ParentOrder.state === '4'}}">
+    <view bindtap="ParentSelecGender" wx:for="{{gender}}" wx:key="index" data-gender="{{item}}" >
+      <text style="background-color:{{ParentOrder.gender == item ? '#DAD8D8' : 'white'}};color:{{ParentOrder.gender == item ? 'black' : ''}}">{{item}}</text>
+      <image src="../../icon/selec.png" style="visibility: {{ParentOrder.gender == item ? 'visible' : 'hidden'}};width:30rpx;height:30rpx"></image>
+    </view>
+  </view>
+  <!-- 家长页面下面的学生列表 -->
+  <!-- 新遮罩 -->
+  <view class="Mask" style="display:{{ParentOrder.state === '0'?'none':''}};min-height:{{height-50-60-175-30 > testData.length*143 ? height-50-60-175-30 : testData.length*143}}px"></view>
+  <view wx:for="{{testData}}" wx:key="index" style="background-color:#FDFDFD;box-shadow:{{index > 0 ? 'none' : 'inset 0px 15px 10px -15px #E2E2E2'}};position:relative">
+    <!-- 遮罩 -->
+    <!-- <view class="{{ParentOrder.state === '0'?'':'Mask'}}"></view> -->
+    <view class="teacherList">
+      <view class="top">
+        <image mode="scaleToFill" src="../../icon/headImg.png" style="height:100%;width:190rpx"></image>
+        <view class="teacherListInfo">
+          <view>
+            <text style="font-size:40rpx;margin-right:10rpx">{{item.name}}</text>
+            <image src="../../icon/{{item.sex == '女' ? 'woman':'man'}}.png" mode="widthFix" style="width:32rpx;;margin-right:30rpx"></image>
+            <text style="font-size:30rpx;color:#E3D131">{{item.grade}}</text>
+          </view>
+          <view>
+            <text style="color:#888888;font-size:28rpx;margin-right:15rpx">{{item.school}}</text>
+            <text style="color:#888888;font-size:28rpx">{{item.major}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="teacherListBottom">
+        <text wx:for="{{item.subject}}" wx:key="index">{{item}}</text>
+      </view>
+    </view>
+    <!-- end -->
+  </view>
+</view>
+<!-- 老师的页面 -->
+<view class="teacherView" wx:if="{{ identity == '老师'}}">
+  <view class="orderView">
+    <view bindtap="TeacherSelec" data-id="1">
+      <text style="color:{{TeacherOrder.state === '1'?'black':''}}">{{TeacherOrder.order?TeacherOrder.order:'排序'}}</text>
+      <image src="../../icon/drop-down.png"></image>
+    </view>
+    <view bindtap="TeacherSelec" data-id="2">
+      <text style="color:{{TeacherOrder.state === '2'?'black':''}}">{{TeacherOrder.subject.sub?TeacherOrder.subject.sub:'科目'}}</text>
+      <image src="../../icon/drop-down.png"></image>
+    </view>
+    <view bindtap="TeacherSelec" data-id="3">
+      <text style="color:{{TeacherOrder.state === '2'?'black':''}}">{{TeacherOrder.region?TeacherOrder.region:'区域'}}</text>
+      <image src="../../icon/drop-down.png"></image>
+    </view>
+    <view bindtap="TeacherSelec" data-id="4">
+      <text style="color:{{TeacherOrder.state === '4'?'black':''}}">{{TeacherOrder.gender?TeacherOrder.gender:'性别'}}</text>
+      <image src="../../icon/drop-down.png"></image>
+    </view>
+  </view>
+  <!-- 第一个下拉框 -->
+  <view class="dropDownOne" wx:if="{{TeacherOrder.state === '1'}}">
+    <view wx:for="{{TOrder}}" wx:key="index" bindtap="TeacherSelecOrder" data-order="{{item}}">
+      <text style="background-color:{{TeacherOrder.order == item ? '#DAD8D8' : 'white'}};color:{{TeacherOrder.order == item ? 'black' : ''}}">{{item}}</text>
+      <image src="../../icon/selec.png" style="visibility: {{TeacherOrder.order == item ? 'visible' : 'hidden'}};width:30rpx;height:30rpx"></image>
+    </view>
+  </view>
+  <!-- 第二个下拉框 -->
+  <view class="dropDownTwo" wx:if="{{TeacherOrder.state === '2'}}">
+    <!-- 左边的类别 -->
+    <view class="subjectType">
+      <text wx:for="{{subject}}" wx:for-index="key" wx:for-item="value" wx:key="index" data-item='{{key}}' bindtap="TeacherSelectType" style="background-color:{{TeacherOrder.subject.type == key ? '#DAD8D8' : 'white'}};color:{{TeacherOrder.subject.type == key ? 'black' : ''}};margin-top:{{key == '小学' ? '10rpx' : '20rpx'}}">{{key}}</text>
+    </view>
+    <!-- 右边的每一课的种类 --> 
+    <view class="EverySubject">
+      <view wx:for="{{subject[TeacherOrder.subject.type]}}" wx:key="index" style="height:{{index < 3 ? '40rpx' : ''}}">
+        <text bindtap="TeacherSelectSub"  data-item='{{item}}' style="background-color:{{TeacherOrder.subject.sub == item ? '#DAD8D8' : 'white'}};color:{{TeacherOrder.subject.sub == item ? 'black' : ''}}">{{item}}</text>
+      </view>
+    </view>
+  </view>
+  <!-- 第三个下拉框 -->
+  <view class="dropDownThree" wx:if="{{TeacherOrder.state === '3'}}">
+    <view wx:for="{{region}}" wx:key="index" >
+      <text bindtap="selectRegion" data-item='{{item}}'style="background-color:{{TeacherOrder.region == item ? '#DAD8D8' : 'white'}};color:{{TeacherOrder.region == item ? 'black' : ''}}">{{item}}</text>
+    </view>
+  </view>
+  <!-- 第四个下拉框 -->
+  <view class="dropDownOne" wx:if="{{TeacherOrder.state === '4'}}">
+    <view bindtap="TeacherSelecGender" wx:for="{{gender}}" wx:key="index" data-gender="{{item}}" >
+      <text style="background-color:{{TeacherOrder.gender == item ? '#DAD8D8' : 'white'}};color:{{TeacherOrder.gender == item ? 'black' : ''}}">{{item}}</text>
+      <image src="../../icon/selec.png" style="visibility: {{TeacherOrder.gender == item ? 'visible' : 'hidden'}};width:30rpx;height:30rpx"></image>
+    </view>
+  </view>
+</view>
+<!-- <view style="height:{{height}}px;width:100%;position:absolute;top:0;background-color:blue"></view> -->

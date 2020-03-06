@@ -1,0 +1,233 @@
+.address{
+  width: 750rpx;
+  height: 60rpx;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.add{
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.add text{
+  font-size: 40rpx;
+  font-family: '黑体'
+}
+.add image{
+  height: 40rpx;
+  width: 50rpx
+}
+.roll{
+  height: 350rpx;
+  width: 750rpx;
+  padding: 20rpx 40rpx;
+  box-sizing: border-box;
+}
+.roll swiper{
+  height: 100%;
+}
+/* .roll navigator{
+  width: 100%;
+  height: 100%
+} */
+.roll image{
+  width: 100%;
+  height: 100%;
+  border-radius: 20rpx;
+}
+.identity{
+  height: 80rpx;
+  width: 750rpx;
+  display: flex;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+  margin-top: 40rpx;
+}
+.identity text{
+  font-family: '黑体';
+  font-size:40rpx;
+}
+.identity > view{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.Parent{
+  margin-right: 40rpx;
+}
+.orderView{
+  height:100rpx;
+  width:750rpx;
+  /* background-color: yellow; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+}
+.orderView text{
+  font-family: '黑体';
+  color:#8a8a8a;
+  font-size: 30rpx;
+}
+.orderView image{
+  height:20rpx;width:20rpx;margin-left:10rpx;
+}
+.dropDownOne{
+  padding: 0 40rpx;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: white;
+}
+.dropDownOne view{
+  height: 80rpx;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: #8a8a8a;
+  font-family: '黑体';
+  align-items: center;
+  font-size: 25rpx;
+}
+.dropDownOne text{
+  line-height: 1.5;
+  padding: 0 10rpx;
+  border-radius: 10rpx;
+}
+.dropDownTwo{
+  width: 100%;
+  /* background-color: yellow; */
+  display: flex;
+  margin-bottom: 10rpx;
+  background-color: white;
+  padding-bottom: 10rpx;
+}
+.subjectType{
+  width:150rpx;
+  background-color: white;
+  border-right: 1px solid silver;
+  padding-left: 40rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.subjectType text{
+  font-size: 25rpx;
+  color: #8a8a8a;
+  padding: 0 10rpx;
+  border-radius: 10rpx;
+} 
+.EverySubject{
+  width:600rpx;
+  padding-left:70rpx;
+  box-sizing: border-box;
+  display:flex;
+  flex-wrap: wrap;
+  align-content:flex-start;
+}
+.EverySubject > view{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  width:33%;
+  height:55rpx
+}
+.EverySubject text{
+  font-size: 25rpx;
+  color: #8a8a8a;
+  display: inline-block;
+  width: auto;
+  padding: 0 10rpx;
+  border-radius: 10rpx;
+}
+.dropDownThree{
+  padding: 0 40rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  background-color: white;
+}
+.dropDownThree > view{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width:33%;
+  height:55rpx;
+  margin-bottom: 20rpx;
+}
+.dropDownThree text{
+  display: inline-block;
+  width: auto;
+  font-size: 30rpx;
+  color: #8a8a8a;
+  padding: 0 10rpx;
+  border-radius: 10rpx;
+}
+.teacherList{
+  height: 286rpx;
+  width: 670rpx;
+  margin: 0 40rpx;
+  padding: 25rpx 0 15rpx 0;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #E2E2E2;
+}
+.teacherList .top{
+  height: 190rpx;
+  width: 100%;
+  /* background-color: sandybrown; */
+  display: flex;
+}
+.teacherListInfo{
+  height: 100%;
+  width: 480rpx;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+}
+.teacherListInfo view{
+  height:50%;
+  width:100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.teacherListInfo text{
+  line-height: 1
+}
+.teacherListBottom{
+  height: 55rpx;
+  width: 100%;
+  /* background-color: skyblue; */
+  padding-left: 210rpx;
+  box-sizing: border-box;
+}
+.teacherListBottom text{
+  display: inline-block;
+  line-height: 1;
+  font-size: 25rpx;
+  padding: 15rpx;
+  background-color: rgba(241, 240, 240, 0.801);
+  color:#727272;
+  box-sizing: border-box;
+  border-radius: 10rpx;
+  margin-right: 30rpx;
+}
+.suspension{
+  position: absolute;
+  top:100rpx;
+  z-index: 999;
+}
+.Mask{
+  opacity: 0.5;
+  background-color: #000000;
+  height: 286rpx;
+  width: 750rpx;
+  position: absolute;
+  top:100rpx;
+  z-index: 1
+}
